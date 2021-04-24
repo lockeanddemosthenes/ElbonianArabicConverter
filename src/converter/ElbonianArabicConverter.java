@@ -12,7 +12,7 @@ import converter.exceptions.ValueOutOfBoundsException;
 public class ElbonianArabicConverter {
 
     // A string that holds the number (Elbonian or Arabic) you would like to convert
-    private final String number = "";
+    private final String number;
 
     /**
      * Constructor for the ElbonianArabic class that takes a string. The string should contain a valid
@@ -121,9 +121,6 @@ public class ElbonianArabicConverter {
                 previousVal = nextVal;
             }
         }
-
-            // cycle through the number with a for loop and check to see if f, n d, l are used more than once
-        // TODO check to see if the number is valid, then set it equal to the string
         this.number = number;
     }
 
@@ -134,6 +131,11 @@ public class ElbonianArabicConverter {
      * @return An arabic value
      */
     public int toArabic() {
+        int tempValue = 0;
+        for (int i= 0; i< number.length(); i++){
+            int currVal = Integer.parseInt(number.(i));
+            if ()
+        }
         // TODO Fill in the method's body
         return 1;
     }

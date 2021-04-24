@@ -19,6 +19,12 @@ public class ConverterTests {
     }
 
     @Test
+    public void ElbonianArabicConverterTest() throws MalformedNumberException, ValueOutOfBoundsException {
+        ElbonianArabicConverter converter = new ElbonianArabicConverter("1");
+        assertEquals(converter.ElbonianArabicConverter(), "I");
+    }
+
+    @Test
     public void ArabicToElbonianSampleTest() throws MalformedNumberException, ValueOutOfBoundsException {
         ElbonianArabicConverter converter = new ElbonianArabicConverter("I");
         assertEquals(converter.toArabic(), 1);
