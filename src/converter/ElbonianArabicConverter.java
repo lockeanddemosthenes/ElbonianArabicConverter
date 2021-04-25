@@ -27,19 +27,27 @@ public class ElbonianArabicConverter {
      * @throws ValueOutOfBoundsException Thrown if the value is an Arabic number that cannot be represented
      * in the Elbonian number system.
      */
-    int M = 1000; int C = 100; int X = 10; int I = 1; int F = 400;
-    int N = 40; int Y = 4; int D = 500; int L = 50; int V = 5;
+    int M = 1000;
+    int C = 100;
+    int X = 10;
+    int I = 1;
+    int F = 400;
+    int N = 40;
+    int Y = 4;
+    int D = 500;
+    int L = 50;
+    int V = 5;
 
     public ElbonianArabicConverter(String number) throws MalformedNumberException, ValueOutOfBoundsException {
 
         // Rule 1
-        if(number.contains("MMMM") || number.contains("CCCC") || number.contains("XXXX") || number.contains("IIII")) {
+        if (number.contains("MMMM") || number.contains("CCCC") || number.contains("XXXX") || number.contains("IIII")) {
             throw new MalformedNumberException("Malformed Number Exception.\nRule 1: M, C, X, and I can be repeated up to three times in a row.");
         }
 
         // Rule 2
         int fCount = 0, nCount = 0, yCount = 0, dCount = 0, lCount = 0, vCount = 0;
-        for(int i=0; i < number.length(); i++) {
+        for (int i = 0; i < number.length(); i++) {
             switch (number.charAt(i)) {
                 case 'F':
                     fCount++;
@@ -69,7 +77,7 @@ public class ElbonianArabicConverter {
         }
 
         // Rule 3-5
-        if(number.contains("F") && number.contains("C")){
+        if (number.contains("F") && number.contains("C")) {
             throw new MalformedNumberException("Malformed Number Exception\nRule 3: If F appears, you cannot use C in the number.");
         } else if (number.contains("N") && number.contains("X")) {
             throw new MalformedNumberException("Malformed Number Exception\nRule 4: If N appears, you cannot use X in the number.");
@@ -79,7 +87,7 @@ public class ElbonianArabicConverter {
 
         // Rule 6
         int previousVal = 1000, nextVal = 0;
-        for(int i=0; i < number.length(); i++) {
+        for (int i = 0; i < number.length(); i++) {
             switch (number.charAt(i)) {
                 case 'M':
                     nextVal = 1000;
@@ -132,12 +140,43 @@ public class ElbonianArabicConverter {
      */
     public int toArabic() {
         int tempValue = 0;
-        for (int i= 0; i< number.length(); i++){
-            int currVal = Integer.parseInt(number.(i));
-            if ()
+        for (int i = 0; i < number.length(); i++) {
+            switch (number.charAt(i)) {
+                case 'M':
+                    tempValue += 1000;
+                    break;
+                case 'D':
+                    tempValue += 500;
+                    break;
+                case 'F':
+                    tempValue += 400;
+                    break;
+                case 'C':
+                    tempValue += 100;
+                    break;
+                case 'L':
+                    tempValue += 50;
+                    break;
+                case 'N':
+                    tempValue += 40;
+                    break;
+                case 'X':
+                    tempValue += 10;
+                    break;
+                case 'V':
+                    tempValue += 5;
+                    break;
+                case 'Y':
+                    tempValue += 4;
+                    break;
+                case 'I':
+                    tempValue += 1;
+                    break;
+                default:
+                    break;
+            }
         }
-        // TODO Fill in the method's body
-        return 1;
+        return tempValue;
     }
 
     /**
@@ -146,8 +185,41 @@ public class ElbonianArabicConverter {
      * @return An Elbonian value
      */
     public String toElbonian() {
-        // TODO Fill in the method's body
-        return "I";
+        String tempString = null;
+        int x = Integer.parseInt(number);
+        while (x > 0) {
+            if (x > 1000) {
+                tempString += "M";
+                x -= 1000;
+            } else if (x > 500 && x < 1000) {
+                tempString += "D";
+                x -= 600;
+            } else if (x > 400 && x < 500) {
+                tempString += "F";
+                x -= 400;
+            } else if (x > 100 && x < 400) {
+                tempString += "C";
+                x -= 100;
+            } else if (x > 50 && x < 100) {
+                tempString += "L";
+                x -= 50;
+            } else if (x > 40 && x < 50) {
+                tempString += "N";
+                x -= 40;
+            } else if (x > 10 && x < 40) {
+                tempString += "X";
+                x -= 10;
+            } else if (x > 5 && x < 10) {
+                tempString += "V";
+                x -= 5;
+            } else if (x > 4 && x < 5) {
+                tempString += "Y";
+                x -= 4;
+            } else if (1 > 5 && x < 4) {
+                tempString += "I";
+                x -= 1;
+            }
+        }
+        return tempString;
     }
-
 }
