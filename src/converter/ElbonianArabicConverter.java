@@ -119,7 +119,8 @@ public class ElbonianArabicConverter {
                 previousVal = nextVal;
             }
         }
-        this.number = number;
+
+        this.number = number.trim();
     }
 
     /**
@@ -177,13 +178,15 @@ public class ElbonianArabicConverter {
     public String toElbonian() throws ValueOutOfBoundsException{
         String tempString = "";
         int x = Integer.parseInt(number);
+        System.out.println(number);
+        //3999
         while (x > 0) {
             if (x >= 1000) {
                 tempString += "M";
                 x -= 1000;
             } else if (x >= 500 && x < 1000) {
                 tempString += "D";
-                x -= 600;
+                x -= 500;
             } else if (x >= 400 && x < 500) {
                 tempString += "F";
                 x -= 400;
